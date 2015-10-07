@@ -1,0 +1,112 @@
+<!DOCTYPE html >
+<html lang="en" ng-app="cursoAngular" >
+<head >
+    <meta charset="UTF-8">
+    <title >Form Validation - Part 1</title >
+    <link href="../../../libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="../../../css/main.css" rel="stylesheet" >
+
+    <style>
+        .erro {
+            color: red;
+        }
+
+        .erro1 {
+            color: yellow;
+        }
+
+        .sucesso {
+            color: green;
+        }
+    </style>
+</head >
+
+<body >
+<nav class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="container" >
+        <div class="navbar-header" >
+            <a class="navbar-brand"
+               href="/" >Dois Forms cada um usa o "mesmo" controller
+            </a >
+        </div >
+    </div >
+</nav >
+
+<div class="container main-content" ng-controller="CursoAngularCtrl" >
+
+    <form name="myForm" ng-submit="onSubmit()" novalidate="novalidate" >
+        <h3 ng-hide="myForm.$invalid" class="sucesso">O formulário está válido</h3>
+        <h3 ng-show="myForm.$invalid" ng-class="getClasse()">O formulário está inválido</h3>
+
+        <div class="form-group" >
+            <label for="classe" >Classe mensagem invalido (erro1 outra classe valida)</label >
+            <input type="text"
+                   class="form-control"
+                   ng-model="classe"
+                   id="classe"
+                   name="classe">
+        </div >
+
+
+        <div class="form-group" >
+            <label for="nome" ng-style="{
+                'font-size' : formModel.nome.length > 8 ? '20px' : '14px'
+           }"> Nome</label >
+            <input type="text"
+                   class="form-control"
+                   ng-model="formModel.nome"
+                   id="nome"
+                   name="nome">
+        </div >
+
+        <div class="form-group" >
+            <label for="email" ng-class="{
+                'erro' : myForm.email.$invalid
+            }">Email</label >
+            <input type="email"
+                   class="form-control"
+                   ng-model="formModel.email"
+                   ng-required="true"
+                   id="email"
+                    name="email">
+        </div >
+
+        <div class="form-group" >
+            <label for="senha" >Senha</label >
+            <input type="password"
+                   class="form-control"
+                   ng-model="formModel.senha"
+                   ng-minlength="4"
+                   id="senha"
+                   name="senha"
+                    required="required">
+        </div >
+
+        <div class="form-group" >
+            <label for="idade" >Idade</label >
+            <input type="number"
+                   class="form-control"
+                   ng-model="formModel.idade"
+                   id="idade"
+                   name="idade">
+        </div >
+
+        <div class="form-group" >
+            <button class="btn btn-primary" type="submit">Register</button >
+        </div >
+
+    </form >
+
+    <pre>{{ formModel | json }}</pre>
+    <pre>{{ myForm.$valid | json }}</pre>
+    <pre>{{ myForm.email.$valid | json }}</pre>
+    <pre>{{ myForm | json }}</pre>
+
+</div >
+
+<script src="../../../libs/angular/angular.min.js" ></script >
+<script src="index.js" ></script >
+
+
+</body >
+</html >
