@@ -1,7 +1,7 @@
 var app = angular.module('cursoAngular', []);
 
 
-//Precisa adicionar a variavel ao $scope para ter acesso a ela no html
+//Não é necessario adicionar a variável ao escopo
 app.controller('CursoAngularCtrl', function($scope) {
-    $scope.formModel = {};
+    //$scope.formModel = {};
 })

@@ -1,0 +1,100 @@
+<!DOCTYPE html >
+<html lang="en" >
+<head >
+    <title >Form Validation - Part 1</title >
+    <link href="../../../libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="../../../css/main.css" rel="stylesheet" >
+</head >
+
+<body >
+<nav class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="container" >
+        <div class="navbar-header" >
+            <a class="navbar-brand"
+               href="/" >Dois Forms cada um usa o "mesmo" controller
+            </a >
+        </div >
+    </div >
+</nav >
+
+<div class="container main-content" ng-app="cursoAngular1" ng-controller="CursoAngularCtrl1" >
+
+    <form name="theForm" ng-submit="onSubmit()" >
+        <div class="form-group" >
+            <label for="name" >Name</label >
+            <input type="text"
+                   class="form-control"
+                   ng-model="formModel.name"
+                   id="name" >
+        </div >
+
+        <div class="form-group" >
+            <label for="username" >Username</label >
+            <input type="text"
+                   class="form-control"
+                   ng-model="formModel.username"
+                   id="username" >
+        </div >
+
+        <div class="form-group" >
+            <label for="age" >Age</label >
+            <input type="number"
+                   class="form-control"
+                   ng-model="formModel.age"
+                   id="age" >
+        </div >
+
+        <div class="form-group" >
+            <button class="btn btn-primary" type="submit">Register</button >
+        </div >
+
+    </form >
+
+    <pre>{{ formModel | json }}</pre>
+
+</div >
+
+<div class="container main-content" ng-app="cursoAngular2" ng-controller="CursoAngularCtrl2" >
+
+    <form name="theForm" ng-submit="onSubmit()" >
+        <div class="form-group" >
+            <label for="name" >Name</label >
+            <input type="text"
+                   class="form-control"
+                   ng-model="formModel.name"
+                   id="name" >
+        </div >
+
+        <div class="form-group" >
+            <label for="username" >Username</label >
+            <input type="text"
+                   class="form-control"
+                   ng-model="formModel.username"
+                   id="username" >
+        </div >
+
+        <div class="form-group" >
+            <label for="age" >Age</label >
+            <input type="number"
+                   class="form-control"
+                   ng-model="formModel.age"
+                   id="age" >
+        </div >
+
+        <div class="form-group" >
+            <button class="btn btn-primary" type="submit">Register</button >
+        </div >
+
+    </form >
+
+    <pre>{{ formModel | json }}</pre>
+
+</div >
+
+
+<script src="../../../libs/angular/angular.min.js" ></script >
+<script src="index.js" ></script >
+
+
+</body >
+</html >
