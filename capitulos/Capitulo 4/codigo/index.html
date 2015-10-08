@@ -36,6 +36,7 @@
 
     <form name="myForm" ng-submit="onSubmit()" novalidate="novalidate" >
         <h3 ng-hide="myForm.$invalid" class="sucesso">O formulário está válido</h3>
+        <h3 ng-show="myForm.$invalid" ng-class="classe">O formulário está inválido</h3>
         <h3 ng-show="myForm.$invalid" ng-class="getClasse()">O formulário está inválido</h3>
 
         <div class="form-group" >
