@@ -1,0 +1,91 @@
+<!DOCTYPE html >
+<html lang="en" ng-app="cursoAngular" >
+<head >
+    <title >Form Validation - Part 1</title >
+    <link href="../../../libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link href="../../../css/main.css" rel="stylesheet" >
+
+    <script src="../../../libs/angular/angular.min.js" ></script >
+</head >
+
+<body >
+<nav class="navbar navbar-inverse navbar-fixed-top" >
+    <div class="container" >
+        <div class="navbar-header" >
+            <a class="navbar-brand"
+               href="/" >Teste do scope "true", atualizando o pai, pq recebe a referencia ao objeto
+            </a >
+        </div >
+    </div >
+</nav >
+
+<hr/>
+<div class="container main-content" ng-controller="controlador" >
+    Controller msg1: {{messages}}
+    <div diretiva-scope-false></div>
+</div >
+
+<hr/>
+<div class="container main-content" ng-controller="controlador" >
+    Controller msg1: {{messages}}
+    <div diretiva-scope-true></div>
+</div >
+
+<hr/>
+<div class="container main-content" ng-controller="controlador" >
+    Controller msg1: {{messages}}
+    <div diretiva-scope-object></div>
+</div >
+
+
+<script src="index.js" ></script >
+
+
+</body >
+
+<script type="text/javascript">
+    var app = angular.module('cursoAngular', []);
+
+
+    app.controller('controlador', ["$scope", function($scope) {
+        $scope.messages = {
+            msg1: "Message 1",
+            msg2: "Message 2"
+        }
+    }]);
+
+    app.directive('diretivaScopeTrue', [function() {
+        return {
+            scope: true,
+            templateUrl: 'customTemplate.html'
+        }
+    }]);
+
+    app.directive('diretivaScopeFalse', [function() {
+        return {
+            scope: false,
+            templateUrl: 'customTemplate.html'
+        }
+    }]);
+
+    app.directive('diretivaScopeObject', [function() {
+        return {
+            scope: {},
+            templateUrl: 'customTemplate.html'
+        }
+    }]);
+</script>
+
+<script type="text/ng-template" id="customTemplate.html">
+
+    Directive: {{messages}}
+
+    <div class="form-group" >
+        <label for="name2" >Nome</label >
+        <input type="text"
+               class="form-control"
+               ng-model="messages.msg2"
+               id="name2" >
+    </div >
+</script>
+</html >
