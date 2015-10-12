@@ -1,0 +1,74 @@
+{
+  "transacoes": [
+    {
+      "id": 1,
+      "nome": "Padaria",
+      "valor": 10.5,
+      "tipo": "DEBITO",
+      "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget."
+    },
+    {
+      "id": 2,
+      "nome": "Paprika",
+      "valor": 8.5,
+      "tipo": "DEBITO",
+      "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis."
+    },
+    {
+      "id": 3,
+      "nome": "Açai",
+      "valor": 12.0,
+      "tipo": "DEBITO",
+      "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut varius."
+    },
+    {
+      "id": 4,
+      "nome": "Cinema",
+      "valor": 15.0,
+      "tipo": "DEBITO",
+      "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu."
+    },
+    {
+      "id": 5,
+      "nome": "Outback",
+      "valor": 27.75,
+      "tipo": "DEBITO",
+      "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget."
+    },
+    {
+      "id": 6,
+      "nome": "Poker",
+      "valor": 50,
+      "tipo": "CREDITO",
+      "descricao": ""
+    },
+    {
+      "id": 7,
+      "nome": "Clipe de papel",
+      "valor": 75,
+      "tipo": "DEBITO",
+      "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget."
+    },
+    {
+      "id": 8,
+      "nome": "Sorvete",
+      "valor": 7,
+      "tipo": "DEBITO",
+      "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at."
+    },
+    {
+      "id": 9,
+      "nome": "Mini senna",
+      "valor": 500,
+      "tipo": "CREDITO",
+      "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget."
+    },
+    {
+      "id": 10,
+      "nome": "Mercado",
+      "valor": 200,
+      "tipo": "DEBITO",
+      "descricao": ""
+    }
+  ]
+}

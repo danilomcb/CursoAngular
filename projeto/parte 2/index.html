@@ -2,16 +2,78 @@
 <html lang="en" ng-app="financas">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Transações</title>
+    <link href="index.css" rel="stylesheet" >
+    <link href="../../libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
 
     <script type="text/javascript" src="../../libs/angular/angular.min.js"></script>
 </head>
 <body>
 
-    <div class="main-content container" ng-controller="Transacoes">
-        {{ transacoes | json}}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#inicio">Inicio</a>
+        </div>
     </div>
+</nav>
 
-    <script type="text/javascript" src="index.js"></script>
+<div id="inicio" class="main-content container" ng-controller="Transacoes">
+    <form ng-submit="onSubmit()" ng-hide="submitted" >
+
+        <div class="form-group" >
+            <label for="nome" class="control-label">Nome</label >
+            <input type="text"
+                   class="form-control"
+                   ng-model="nome"
+                   id="nome"
+                   required="required" >
+        </div >
+
+        <div class="form-group">
+            <label for="valor" class="control-label">Valor</label >
+            <input type="number"
+                   class="form-control"
+                   ng-model="valor"
+                   id="valor"
+                   required="required" >
+        </div >
+
+        <div class="form-group" >
+            <label for="tipo" class="control-label">Tipo</label >
+            <select id="tipo"
+                    class="form-control"
+                    ng-model="formModel.tipo"
+                    required="required" >
+                <option value="" >Porfavor selecione</option >
+                <option value="DEBITO" >Debito</option >
+                <option value="CREDITO" >Credito</option >
+            </select >
+        </div >
+
+        <div class="form-group">
+
+            <div class="alert alert-danger text-center" ng-cloak ng-show="has_error">
+                <h3>There was a problem registering, please try again later!</h3>
+            </div>
+
+            <button class="btn btn-primary"
+                    ladda="submitting"
+                    data-style="expand-right"
+                    type="submit">
+                <span ng-show="submitting">Registering</span>
+                <span ng-show="!submitting">Register</span>
+            </button>
+        </div>
+
+    </form >
+
+    <div class="alert alert-info text-center" ng-cloak ng-show="submitted">
+        <h3>Thanks for Registering!</h3>
+    </div>
+</div>
+
+<script type="text/javascript" src="index.js"></script>
+
 </body>
 </html>
