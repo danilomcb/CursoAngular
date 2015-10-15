@@ -21,53 +21,53 @@
 
 <div class="main-content container" ng-controller="Transacoes">
 
-    <div class="row" >
-        <div class="col-md-12" >
-            <form class="form-inline well well-sm" >
-                <span class="glyphicon glyphicon-search" ></span >
-
-                <div class="form-group" >
-                    <input type="text"
-                           class="form-control"
-                           id="nome"
-                           ng-model="pesquisa.nome"
-                           placeholder="Filtrar por nome..."/>
-                </div >
-
-                <div class="form-group" >
-                    <input type="text"
-                           class="form-control"
-                           id="valor"
-                           ng-model="pesquisa.valor"
-                           placeholder="Filtrar por valor..."/>
-                </div >
-
-                <div class="form-group" >
-                    <input type="text"
-                           class="form-control"
-                           id="geral"
-                           ng-model="pesquisa.geral"
-                           placeholder="Filtrar geral..."/>
-                </div >
-
-                <span class="glyphicon glyphicon-sort-by-attributes" ></span >
-
-                <div class="form-group" >
-                    <select class="form-control"
-                            ng-model="ordem">
-                        <option value="nome" >Nome (ASC)</option >
-                        <option value="-nome" >Nome (DEC)</option >
-                        <option value="valor" >Valor (ASC)</option >
-                        <option value="-valor" >Valor (DEC)</option >
-                    </select >
-                </div >
-
-            </form >
-        </div >
-    </div >
-
     <div class="row">
         <div class="col-md-8">
+            <div class="row" >
+                <div class="col-md-12" >
+                    <form class="form-inline well well-sm" >
+                        <span class="glyphicon glyphicon-search" ></span >
+
+                        <div class="form-group" >
+                            <input type="text"
+                                   class="form-control"
+                                   id="nome"
+                                   ng-model="pesquisa.nome"
+                                   placeholder="Filtrar por nome..."/>
+                        </div >
+
+                        <div class="form-group" >
+                            <input type="text"
+                                   class="form-control"
+                                   id="valor"
+                                   ng-model="pesquisa.valor"
+                                   placeholder="Filtrar por valor..."/>
+                        </div >
+
+                        <div class="form-group" >
+                            <input type="text"
+                                   class="form-control"
+                                   id="geral"
+                                   ng-model="pesquisa.geral"
+                                   placeholder="Filtrar geral..."/>
+                        </div >
+
+                        <span class="glyphicon glyphicon-sort-by-attributes" ></span >
+
+                        <div class="form-group" >
+                            <select class="form-control"
+                                    ng-model="ordem">
+                                <option value="nome" >Nome (ASC)</option >
+                                <option value="-nome" >Nome (DEC)</option >
+                                <option value="valor" >Valor (ASC)</option >
+                                <option value="-valor" >Valor (DEC)</option >
+                            </select >
+                        </div >
+
+                    </form >
+                </div >
+            </div >
+
             <table class="table table-bordered">
                 <tr>
                     <th>#</th>
