@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="financas">
+<head>
+    <meta charset="UTF-8">
+    <title>Transações</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="../../libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../libs/ladda/dist/ladda-themeless.min.css">
+    <link rel="stylesheet" href="../../libs/font-awesome/css/font-awesome.min.css" >
+
+    <script type="text/javascript" src="../../libs/angular/angular.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Inicio</a>
+        </div>
+    </div>
+</nav>
+
+<div class="main-content container">
+    <div class="row">
+
+        <div class="col-md-8" ng-controller="TransacoesLista">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form-inline well well-sm">
+                        <span class="glyphicon glyphicon-search"></span>
+
+                        <div class="form-group">
+                            <input type="text"
+                                   class="form-control"
+                                   id="nome"
+                                   ng-model="pesquisa.nome"
+                                   placeholder="Filtrar por nome..."/>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text"
+                                   class="form-control"
+                                   id="valor"
+                                   ng-model="pesquisa.valor"
+                                   placeholder="Filtrar por valor..."/>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text"
+                                   class="form-control"
+                                   id="geral"
+                                   ng-model="pesquisa.geral"
+                                   placeholder="Filtrar geral..."/>
+                        </div>
+
+                        <span class="glyphicon glyphicon-sort-by-attributes"></span>
+
+                        <div class="form-group">
+                            <select class="form-control"
+                                    ng-model="ordem">
+                                <option value="nome">Nome (ASC)</option>
+                                <option value="-nome">Nome (DEC)</option>
+                                <option value="valor">Valor (ASC)</option>
+                                <option value="-valor">Valor (DEC)</option>
+                            </select>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <tr>
+                    <th class="col-1">#</th>
+                    <th class="col-2">
+                        <div class="sortables">
+                            <span ng-click="ordem = 'nome'" class="fa fa-sort-asc"></span>
+                            <span ng-click="ordem = '-nome'" class="fa fa-sort-desc"></span>
+                        </div>
+                        Nome
+                    </th>
+                    <th class="col-3">
+                        <div class="sortables">
+                            <span ng-click="ordem = 'valor'" class="fa fa-sort-asc"></span>
+                            <span ng-click="ordem = '-valor'" class="fa fa-sort-desc"></span>
+                        </div>
+                        Valor
+                    </th>
+                </tr>
+
+                <tr ng-repeat="transacao in (transacoes.lista | filter:filtrar | orderBy:ordem )"
+                    ng-click="transacoes.selecionada = transacao"
+                    ng-style="{
+							 'background-color': transacao.id == transacoes.selecionada.id ? 'lightgray' : ''
+						}">
+                    <td ng-cloak>{{ $index }}</td>
+                    <td ng-cloak>{{ transacao.nome }}</td>
+                    <td ng-cloak>{{ transacao.valor | currency }}</td>
+                </tr>
+            </table>
+
+            <div ng-show="transacoes.length == 0" ng-cloak>
+                <td colspan="3">
+                    <div class="alert alert-info">
+                        <p class="text-center">Nenhuma transação disponível</p>
+                    </div>
+                </td>
+            </div>
+
+            <div class="spinner" ng-show="transacoes.carregando" ng-cloak>
+                <span us-spinner="{radius:8, width:5, length: 3, lines:9}"></span>
+
+                <p>Carregando...</p>
+            </div>
+        </div>
+
+        <div class="col-md-4" ng-controller="TransacoesDetalhes">
+            <div class="panel panel-default">
+                <div class="panel-heading">Details</div>
+                <div class="panel-body">
+
+                    <dl>
+                        <dt>Nome</dt>
+                        <dd ng-cloak>{{transacoes.selecionada.nome}}</dd>
+                        <dt>Valor</dt>
+                        <dd ng-cloak>{{transacoes.selecionada.valor | currency}}</dd>
+                        <dt>Descrição</dt>
+                        <dd ng-cloak>{{transacoes.selecionada.descricao}}</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="index.js" type="text/javascript"></script>
+<script src="../../libs/spin.js/spin.js" type="text/javascript"></script>
+<script src="../../libs/angular-spinner/angular-spinner.min.js" type="text/javascript"></script>
+<script src="../../libs/ladda/dist/spin.min.js" type="text/javascript"></script>
+<script src="../../libs/ladda/dist/ladda.min.js" type="text/javascript"></script>
+<script src="../../libs/angular-ladda/dist/angular-ladda.min.js" type="text/javascript"></script>
+<script src="../../libs/angular-auto-validate/dist/jcs-auto-validate.min.js" type="text/javascript"></script>
+
+</body>
+</html>
