@@ -49,7 +49,7 @@ app.controller("TransacoesDetalhes", ["$scope", "TransacaoService", function ($s
 
 
 app.factory("Transacao", ["$resource", function ($resource) {
-    return $resource('http://localhost:8080/curso/transacoes/:id', {id: "@id"}, {
+    return $resource('http://localhost:8080/CursoAngular/transacoes/:id', {id: "@id"}, {
         update: {
             method: "PUT"
         }

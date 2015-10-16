@@ -21,7 +21,7 @@ app.factory("TransacaoService", ["$http", function ($http) {
         lista: [],
         selecionada: null,
         carregarTransacoes: function () {
-            $http.get("http://localhost:8080/curso/transacoes", {}).then(
+            $http.get("http://localhost:8080/CursoAngular/transacoes", {}).then(
                 function successCallback(response) {
                     self.lista = response.data.list;
                 }, function errorCallback(response) {

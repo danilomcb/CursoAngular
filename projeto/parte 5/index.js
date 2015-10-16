@@ -38,7 +38,7 @@ app.factory("TransacaoService", ["$http", function ($http) {
         selecionada: null,
         carregarTransacoes: function () {
             self.carregando = true;
-            $http.get("http://localhost:8080/curso/transacoes", {}).then(
+            $http.get("http://localhost:8080/CursoAngular/transacoes", {}).then(
                 function successCallback(response) {
                     self.lista = response.data.list;
                     self.carregando = false;
