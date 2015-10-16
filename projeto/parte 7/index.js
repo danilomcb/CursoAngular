@@ -1,0 +1,122 @@
+var app = angular.module("financas", [
+    'angular-ladda',
+    'jcs-autoValidate',
+    'ngResource',
+    'toaster',
+    'ngAnimate',
+    'angularSpinner'
+]);
+
+app.config(function ($httpProvider, laddaProvider) {
+    $httpProvider.defaults.headers.common.Authorization = "Tartagura Anonima";
+    laddaProvider.setOption({
+        style: 'expand-right'
+    });
+});
+
+app.controller("TransacoesLista", ["$scope", "TransacaoService", function ($scope, TransacaoService) {
+    $scope.pesquisa = {};
+    $scope.ordem = "nome";
+    $scope.transacoes = TransacaoService;
+    $scope.transacoes.carregarTransacoes();
+
+    $scope.filtrar = function (transacao) {
+        if ($scope.pesquisa.geral) {
+            return transacao.nome.indexOf($scope.pesquisa.geral) > 0 ||
+                transacao.valor == $scope.pesquisa.geral;
+        }
+
+        return true;
+    };
+}]);
+
+app.controller("TransacoesDetalhes", ["$scope", "TransacaoService",
+    function ($scope, TransacaoService) {
+
+    $scope.transacaoSelecionada = null;
+    $scope.transacoes = TransacaoService;
+
+    $scope.salvar = function () {
+        $scope.transacoes.salvar($scope.transacaoSelecionada)
+    };
+
+    $scope.remover = function () {
+        $scope.transacoes.remover($scope.transacaoSelecionada)
+    };
+
+    $scope.$watch("transacoes.selecionada", function(valorNovo, valorAntigo) {
+        $scope.transacaoSelecionada = angular.copy(valorNovo);
+        $scope.formTransacao.$setPristine(true);
+    });
+}]);
+
+
+app.factory("Transacao", ["$resource", function ($resource) {
+    return $resource('http://localhost:8080/CursoAngular/transacoes/:id', {id: "@id"}, {
+        update: {
+            method: "PUT"
+        }
+    });
+}]);
+
+
+app.factory("TransacaoService", ["Transacao", "$http", "toaster",
+    function (Transacao, $http, toaster) {
+    var self = {
+        lista: [],
+        isSalvando: false,
+        isDeletando: false,
+        isCarregando: false,
+        selecionada: null,
+        carregarTransacoes: function () {
+            self.isCarregando = true;
+
+            Transacao.get({},
+                function (response) {
+                    self.lista = [];
+                    angular.forEach(response.list, function (transacao) {
+                        self.lista.push(new Transacao(transacao));
+                    });
+                    self.isCarregando = false;
+                },
+                function (error) {
+                    console.log(error);
+                }
+            );
+        },
+        remover: function (transacao) {
+            self.isDeletando = true;
+            transacao.$remove().then(function () {
+                self.isDeletando = false;
+
+                var index = self.lista.indexOf(self.selecionada);
+                self.lista.splice(index, 1);
+                self.selecionada = null;
+                toaster.pop('success', transacao.nome + ' Removida.');
+            }, function (error) {
+                self.isDeletando = false;
+                toaster.pop('success', 'Error ao remover ' + transacao.nome);
+            });
+        },
+        salvar: function (transacao) {
+            self.isSalvando = true;
+
+            transacao.$update().then(
+                function (response) {
+                    console.log(response);
+                    self.isSalvando = false;
+
+                    var index = self.lista.indexOf(self.selecionada);
+                    self.lista[index] = transacao;
+                    self.selecionada = transacao;
+                    toaster.pop('success', transacao.nome + ' Atualizada.');
+                }, function (error) {
+                    self.isSalvando = false;
+                    toaster.pop('success', 'Error ao atualizar ' + transacao.nome);
+                }
+            );
+        }
+    };
+
+    return self;
+}]);
