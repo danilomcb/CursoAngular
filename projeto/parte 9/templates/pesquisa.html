@@ -1,0 +1,25 @@
+<form class="navbar-form navbar-left">
+    <span class="fa fa-search"></span>
+
+    <div class="form-group">
+        <input type="text"
+               class="form-control"
+               id="geral"
+               ng-model="transacoes.pesquisa"
+               ng-model-options="{ debounce: 300}"
+               placeholder="Pesquisar..."/>
+    </div>
+
+    <span class="fa fa-sort"></span>
+
+    <div class="form-group">
+        <select class="form-control"
+                ng-model="transacoes.ordem">
+            <option value="nome">Nome (ASC)</option>
+            <option value="-nome">Nome (DEC)</option>
+            <option value="valor">Valor (ASC)</option>
+            <option value="-valor">Valor (DEC)</option>
+        </select>
+    </div>
+
+</form>

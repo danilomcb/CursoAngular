@@ -1,0 +1,53 @@
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th class="col-1">#</th>
+            <th class="col-2">
+                <div class="sortables">
+                    <span ng-click="transacoes.ordem = 'nome'" class="fa fa-sort-asc"></span>
+                    <span ng-click="transacoes.ordem = '-nome'" class="fa fa-sort-desc"></span>
+                </div>
+                Nome
+            </th>
+            <th class="col-3">
+                <div class="sortables">
+                    <span ng-click="transacoes.ordem = 'valor'" class="fa fa-sort-asc"></span>
+                    <span ng-click="transacoes.ordem = '-valor'" class="fa fa-sort-desc"></span>
+                </div>
+                Valor
+            </th>
+            <th class="col-4">Ações</th>
+        </tr>
+
+        <tr ng-repeat="transacao in (transacoes.lista | filter:filtrar | orderBy:transacoes.ordem )"
+            ng-click="transacoes.selecionada = transacao"
+            ng-style="{
+							 'background-color': transacao.id == transacoes.selecionada.id ? 'lightgray' : ''
+						}">
+            <td ng-cloak>{{ $index }}</td>
+            <td ng-cloak>{{ transacao.nome }}</td>
+            <td ng-cloak>{{ transacao.valor | currency }}</td>
+            <td ng-cloak>
+                <btn-acao icone="fa-edit" ui-sref="editar({id:transacao.id})"></btn-acao>
+                <btn-acao icone="fa-trash-o" ng-click="remover(transacao)"></btn-acao>
+            </td>
+        </tr>
+    </table>
+
+    <div ng-show="transacoes.length == 0" ng-cloak>
+        <td colspan="3">
+            <div class="alert alert-info">
+                <p class="text-center">Nenhuma transação disponível</p>
+            </div>
+        </td>
+    </div>
+
+    <cc-spinner is-loading="transacoes.isCarregando"
+                message="Carregando..."></cc-spinner>
+</div>
