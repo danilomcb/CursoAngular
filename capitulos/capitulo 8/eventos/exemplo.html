@@ -13,6 +13,8 @@
         {{texto1}}
         <br/>
         {{texto2}}
+        <br/>
+        {{textoSuper}}
         <button ng-click="emitir()">Emitir</button>
         <button ng-click="broadcast()">Broadcast</button>
 
@@ -42,6 +44,7 @@
             .controller("superControlador1", ["$scope", function($scope) {
                 $scope.texto1 = "superControlador1";
                 $scope.texto2 = "superControlador1 texto secundario";
+                $scope.textoSuper = "texto - super";
                 $scope.$on("evento", function (event, args1, args2) {
                     console.log("recebido em superControlador1")
                     console.log(event)
