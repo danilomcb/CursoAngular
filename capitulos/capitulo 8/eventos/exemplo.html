@@ -1,0 +1,94 @@
+<!doctype html>
+<html ng-app="myApp">
+<body>
+
+<div ng-controller="superControlador1">
+    {{texto1}}
+    <br/>
+    {{texto2}}
+
+    <br/>
+    <br/>
+    <div ng-controller="controlador1">
+        {{texto1}}
+        <br/>
+        {{texto2}}
+        <button ng-click="emitir()">Emitir</button>
+        <button ng-click="broadcast()">Broadcast</button>
+
+        <br/>
+        <br/>
+        <div ng-controller="subControlador1">
+            {{texto1}}
+            <br/>
+            {{texto2}}
+        </div>
+    </div>
+</div>
+
+<hr/>
+
+<div ng-controller="controlador2">
+    {{texto1}}
+    <br/>
+    {{texto2}}
+    <br/>
+    {{texto3}}
+</div>
+
+<script src="../../../libs/angular/angular.min.js"></script>
+<script type="text/javascript">
+    angular.module('myApp', [])
+            .controller("superControlador1", ["$scope", function($scope) {
+                $scope.texto1 = "superControlador1";
+                $scope.texto2 = "superControlador1 texto secundario";
+                $scope.$on("evento", function (event, args1, args2) {
+                    console.log("recebido em superControlador1")
+                    console.log(event)
+                    console.log(args1)
+                    console.log(args2)
+                })
+            }])
+            .controller("controlador1", ["$scope", function($scope) {
+                $scope.texto1 = "controlador1";
+                $scope.texto2 = "controlador1 texto secundario";
+                $scope.emitir = function() {
+                    $scope.$emit("evento", "Evento de emit", "Segundo argumento emit");
+                };
+                $scope.broadcast = function() {
+                    $scope.$broadcast("evento", {
+                        conteudo: "Mensagem do evento",
+                        valor: 13
+                    });
+                };
+                $scope.$on("evento", function (event, args1, args2) {
+                    console.log("recebido em controlador1")
+                    console.log(event)
+                    console.log(args1)
+                    console.log(args2)
+                })
+            }])
+            .controller("subControlador1", ["$scope", function($scope) {
+                $scope.texto1 = "subControlador1";
+                $scope.texto2 = "subControlador1 texto secundario";
+                $scope.$on("evento", function (event, args1, args2) {
+                    console.log("recebido em subControlador1")
+                    console.log(event)
+                    console.log(args1)
+                    console.log(args2)
+                })
+            }])
+            .controller("controlador2", ["$scope", function($scope) {
+                $scope.texto1 = "controlador2";
+                $scope.texto2 = "controlador2 texto 2";
+                $scope.texto3 = "controlador2 texto 3";
+                $scope.$on("evento", function (event, args1, args2) {
+                    console.log("recebido em controlador2")
+                    console.log(event)
+                    console.log(args1)
+                    console.log(args2)
+                })
+            }]);
+</script>
+</body>
+</html>
